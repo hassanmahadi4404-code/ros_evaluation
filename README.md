@@ -1,7 +1,7 @@
 This project simulates a modular multi-mission rover system in ROS 2 Jazzy using rclpy and turtlesim.
 It demonstrates how to design and integrate Science, Delivery, Equipment Servicing, and Autonomous Navigation missions using proper ROS 2 communication paradigms (topics, services, actions, parameters).
 
-🧩 System Overview
+**System Overview**
 Mission Modes
 
 Science Mission — Turtle moves to a site, “documents” it by capturing a dummy image and GNSS coordinate.
@@ -12,25 +12,10 @@ Equipment Servicing Mission — Turtle performs simulated maintenance operations
 
 Autonomous Navigation Mission — Turtle autonomously visits multiple waypoints (GNSS & vision targets).
 
-🏗️ System Architecture
+
+**System Architecture**
 
 Each mission runs as a separate node, managed by a central Mission Manager Node.
-
-              +----------------+
-              | Mission Manager|
-              +--------+-------+
-                       |
-         +-------------+--------------+
-         |             |              |
- +-------v-----+ +-----v-------+ +----v------+
- | ScienceNode | | DeliveryNode| | Equipment |
- +-------------+ +-------------+ +-----------+
-                       |
-                       v
-              +------------------+
-              | Autonomous Nav   |
-              +------------------+
-
 
 All missions communicate via topics, actions, and parameters.
 
@@ -41,8 +26,9 @@ Service	Mission mode switching	/set_mission_mode
 Action	Delivery pick-and-place tasks	/delivery_action
 Parameters	Selecting mission mode dynamically	mission_mode
 LifecycleNode (optional)	Managing mission states	MissionManager lifecycle transitions
-🧠 Node Descriptions
-🧪 1. Science Node (science_node.py)
+
+**Node Descriptions**
+**1. Science Node (science_node.py)**
 
 Moves turtle to predefined waypoints (“sites”).
 
@@ -60,7 +46,7 @@ Service or timer for taking “pictures”
 
 File writing for simulated GNSS logs
 
-📦 2. Delivery Node (delivery_node.py)
+**2. Delivery Node (delivery_node.py)**
 
 Implements a ROS 2 Action Server (PickAndDeliver.action).
 
@@ -76,7 +62,7 @@ Action feedback and result handling
 
 Dummy “delivery complete” log
 
-🔧 3. Equipment Servicing Node (equipment_servicing_node.py)
+**3. Equipment Servicing Node (equipment_servicing_node.py)**
 
 Simulates maintenance on a “lander”.
 
@@ -98,7 +84,7 @@ Publisher for simulated maintenance status
 
 Service to trigger or stop maintenance
 
-🤖 4. Autonomous Navigation Node (autonomous_nav_node.py)
+**4. Autonomous Navigation Node (autonomous_nav_node.py)**
 
 Navigates through 4 waypoints:
 
@@ -122,7 +108,7 @@ Waypoint list and navigation loop
 
 Print-based LED simulation
 
-🧭 5. Mission Manager Node (mission_manager.py)
+**5. Mission Manager Node (mission_manager.py)**
 
 Central controller.
 
@@ -140,7 +126,7 @@ Conditional logic for mission switching
 
 Lifecycle-like state management
 
-🚀 Launch Process
+**Launch Process**
 Launch File: mission_system.launch.py
 
 Starts all nodes together and sets initial mission mode.
@@ -154,14 +140,8 @@ ros2 param set /mission_manager mission_mode delivery
 ros2 param set /mission_manager mission_mode equipment
 ros2 param set /mission_manager mission_mode nav
 
-🧩 Node Graph
-Node	Subscribes	Publishes	Services/Actions	Purpose
-mission_manager	/mission_status	/mission_command	/set_mission_mode	Control mission mode
-science_node	/mission_command	/turtle1/cmd_vel, /science_log	—	Site exploration
-delivery_node	/mission_command	/turtle1/cmd_vel	/delivery_action (action)	Delivery tasks
-equipment_servicing_node	/mission_command	/equipment_status	/start_service	Maintenance simulation
-autonomous_nav_node	—	/turtle1/cmd_vel, /led_status	—	Navigation
-🧪 How to Run
+
+**How to Run**
 1️⃣ Build the workspace
 colcon build
 source install/setup.bash
@@ -187,7 +167,7 @@ Equipment: Publishes maintenance status.
 
 Navigation: Prints LED status and waypoints reached.
 
-📁 Folder Structure
+Folder Structure
 rover_missions/
 │
 ├── launch/
@@ -206,7 +186,7 @@ rover_missions/
 ├── package.xml
 └── setup.py
 
-📸 Example Outputs
+**Example Outputs**
 
 Science mission:
 Image saved: site_1.jpg

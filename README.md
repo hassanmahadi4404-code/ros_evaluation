@@ -4,7 +4,7 @@ This project simulates a modular multi-mission rover system in **ROS 2 Jazzy** u
 
 ---
 
-## 🚀 System Overview
+## System Overview
 
 ### Mission Modes
 
@@ -22,7 +22,7 @@ This project simulates a modular multi-mission rover system in **ROS 2 Jazzy** u
 
 ---
 
-## 🏗 System Architecture
+## System Architecture
 
 - Each mission runs as a **separate node**, managed by a central **Mission Manager Node**.
 - All missions communicate via **topics, actions, and parameters**.
